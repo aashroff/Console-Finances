@@ -111,6 +111,8 @@ var finances = [
     let biggestLossMonth = 0;
     let biggestProfitMonth = 0;
 
+    let profitChange = 0;
+
     // Calculate from the array
 
     for(let i = 0; i < totalMonths; i++){
@@ -130,15 +132,23 @@ var finances = [
             biggestLoss = finances[i][1]
             biggestLossMonth = i;
         }
+
+        //Track the month by month change in profit.
+
+        if(i > 0){
+        profitChange += finances[i][1] - finances[i-1][1];
+        }
         
         
     }
 
-    let average = total / totalMonths;
+
+    //Calculate the average change in monthly profit across the entire period.
+    let average = profitChange / totalMonths;
 
     console.log("Total: $ " + total);
     document.write("<p>Total: $ " + total + "</p>");
-    console.log("Total: $ " + average.toFixed(2));
+    console.log("Average: $ " + average.toFixed(2));
     document.write("<p>Average: $ " + average.toFixed(2) + "</p>");
 
     console.log("Greatest Increase in Profits: " + finances[biggestProfitMonth][0] +" $" + biggestProfit);
